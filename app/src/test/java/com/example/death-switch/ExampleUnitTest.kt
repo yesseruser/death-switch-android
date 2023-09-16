@@ -1,4 +1,4 @@
-package com.example.deathswitch
+package com.example.`death-switch`
 
 import org.junit.Test
 
