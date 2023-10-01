@@ -33,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yesser_studios.death_switch.ui.theme.DeathSwitchTheme
+import com.yesser_studios.death_switch.ui.theme.Typography
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -67,7 +68,8 @@ fun AppContent() {
                 Row (
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(4.dp)) {
-                    Text("Death", modifier = Modifier.padding(4.dp), fontSize = 20.sp)
+                    Text("Death", modifier = Modifier.padding(4.dp),
+                        style = Typography.bodyLarge)
                     Switch(
                         checked = checked,
                         modifier = Modifier.padding(4.dp),
@@ -78,8 +80,6 @@ fun AppContent() {
                                     dataStore.setDeaths(loadedDeathCount.value!! + 1)
                                 }
                             }
-
-
                         },
                         thumbContent = {
                             if (checked) {
@@ -93,7 +93,9 @@ fun AppContent() {
                     Column (
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center) {
-                        Text("You died!", modifier = Modifier.padding(4.dp), fontSize = 20.sp)
+                        Text("You died!",
+                            modifier = Modifier.padding(4.dp),
+                            style = Typography.bodyLarge)
                         Button(
                             modifier = Modifier.padding(4.dp),
                             onClick = {
@@ -103,7 +105,7 @@ fun AppContent() {
                                 imageVector = Icons.Filled.Refresh,
                                 contentDescription = "Respawn",
                                 modifier = Modifier.padding(4.dp))
-                            Text(text = "Respawn", fontSize = 20.sp)
+                            Text(text = "Respawn", style = Typography.bodyLarge)
                         }
                     }
                 }
