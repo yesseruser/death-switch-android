@@ -114,6 +114,8 @@ fun AppContent() {
             DeathCounter(
                 deaths = loadedDeathCount.value!!,
                 horizontalAlignment = Alignment.CenterHorizontally,
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
                 verticalArrangement = Arrangement.Bottom)
         }
     }
@@ -122,14 +124,29 @@ fun AppContent() {
 @Composable
 fun DeathCounter (deaths: Int,
                   horizontalAlignment: Alignment.Horizontal,
+                  verticalAlignment: Alignment.Vertical,
+                  horizontalArrangement: Arrangement.Horizontal,
                   verticalArrangement: Arrangement.Vertical) {
     Column (
         horizontalAlignment = horizontalAlignment,
         verticalArrangement = verticalArrangement) {
-            Text(
-                text = "Number of deaths: $deaths",
-                fontSize = 20.sp,
-                modifier = Modifier.padding(8.dp))
+            Row (
+                modifier = Modifier.padding(8.dp),
+                horizontalArrangement = horizontalArrangement,
+                verticalAlignment = verticalAlignment) {
+                    Text(
+                        text = "Number of deaths:",
+                        fontSize = 20.sp,
+                        modifier = Modifier.padding(4.dp))
+                    HighlightText(text = "$deaths", Modifier.padding(4.dp))
+            }
+    }
+}
+
+@Composable
+fun HighlightText(text: String, modifier: Modifier) {
+    Button( onClick = { }, modifier = modifier ) {
+        Text(text = text, fontSize = 20.sp)
     }
 }
 
