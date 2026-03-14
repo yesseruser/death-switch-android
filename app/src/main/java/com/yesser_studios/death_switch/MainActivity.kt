@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun AppContent() {
     val context = LocalContext.current
-    val dataStore = preferenceDataStore(context = context)
+    val dataStore = PreferenceDataStore(context = context)
     val scope = rememberCoroutineScope()
     val loadedDeathCount = dataStore.getDeaths().collectAsState(initial = 0)
 
