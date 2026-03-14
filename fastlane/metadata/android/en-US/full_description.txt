@@ -1,0 +1,3 @@
+Death Switch is an antistress app, where you can turn on the death switch and then click the button to respawn.
+
+Deaths are added to a counter that saves after closing the app.
