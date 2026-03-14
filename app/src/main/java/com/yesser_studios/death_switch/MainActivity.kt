@@ -30,10 +30,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.yesser_studios.death_switch.ui.theme.DeathSwitchTheme
+import com.yesser_studios.death_switch.ui.theme.GoogleSansBold
 import com.yesser_studios.death_switch.ui.theme.Typography
 import kotlinx.coroutines.launch
 
@@ -70,7 +72,7 @@ fun AppContent() {
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(4.dp)) {
                     Text("Death", modifier = Modifier.padding(4.dp),
-                        style = Typography.bodyLarge)
+                        style = Typography.bodyLarge, fontFamily = GoogleSansBold)
                     Switch(
                         checked = checked,
                         modifier = Modifier.padding(4.dp),
@@ -107,7 +109,8 @@ fun AppContent() {
                                 painter = painterResource(R.drawable.refresh_24px),
                                 contentDescription = "Respawn",
                                 modifier = Modifier.padding(4.dp))
-                            Text(text = "Respawn", style = Typography.bodyLarge)
+                            Text(text = "Respawn", style = Typography.bodyLarge,
+                                fontFamily = GoogleSansBold)
                         }
                     }
                 }
@@ -148,7 +151,7 @@ fun DeathCounter (deaths: Int,
 @Composable
 fun HighlightText(text: String, modifier: Modifier) {
     Button( onClick = { }, modifier = modifier ) {
-        Text(text = text, fontSize = 20.sp)
+        Text(text = text, fontSize = 20.sp, fontFamily = GoogleSansBold)
     }
 }
 
