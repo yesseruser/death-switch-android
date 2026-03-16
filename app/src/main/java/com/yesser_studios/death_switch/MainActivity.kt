@@ -84,14 +84,15 @@ fun AppContent() {
     val migrationManager = remember { MigrationManager(context) }
 
     var isInitialized by remember { mutableStateOf(false) }
+    var initError by remember { mutableStateOf<Throwable?>(null) }
 
     LaunchedEffect(Unit) {
         try {
             jsonStorage.load()
             migrationManager.migrateIfNeeded(jsonStorage)
+            isInitialized = true
         } catch (e: Exception) {
-            // Handle error - keep default state
-        } finally {
+            initError = e
             isInitialized = true
         }
     }
@@ -100,6 +101,20 @@ fun AppContent() {
     var selectedDestination by remember { mutableStateOf(AppDestination.DeathSwitch) }
 
     val useNavigationRail = screenWidthDp >= 600.dp
+
+    if (!isInitialized) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("Loading...")
+        }
+        return
+    }
+
+    if (initError != null) {
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            Text("Failed to initialize data")
+        }
+        return
+    }
 
     DeathSwitchTheme {
         if (useNavigationRail) {
