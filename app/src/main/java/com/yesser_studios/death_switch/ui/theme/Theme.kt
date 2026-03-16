@@ -41,6 +41,7 @@ fun DeathSwitchTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,
+    typography: androidx.compose.material3.Typography = Typography,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
