@@ -86,9 +86,14 @@ fun AppContent() {
     var isInitialized by remember { mutableStateOf(false) }
 
     LaunchedEffect(Unit) {
-        jsonStorage.load()
-        migrationManager.migrateIfNeeded(jsonStorage)
-        isInitialized = true
+        try {
+            jsonStorage.load()
+            migrationManager.migrateIfNeeded(jsonStorage)
+        } catch (e: Exception) {
+            // Handle error - keep default state
+        } finally {
+            isInitialized = true
+        }
     }
 
     val totalDeaths by repository.database.collectAsState(initial = DeathsDatabase())
