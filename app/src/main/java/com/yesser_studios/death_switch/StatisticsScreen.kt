@@ -1,5 +1,6 @@
 package com.yesser_studios.death_switch
 
+import android.util.Log
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
@@ -37,6 +38,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -219,6 +221,8 @@ fun DeathsChart(
     val onSurfaceVariantColor = MaterialTheme.colorScheme.onSurfaceVariant
 
     var selectedIndex by remember { mutableStateOf<Int?>(null) }
+    val density = LocalDensity.current
+    val thresholdPx = with(density) { 20.dp.toPx() }
 
     val maxCount = (records.maxOfOrNull { it.count } ?: 1).coerceAtLeast(1)
     val minCount = 0
@@ -259,7 +263,7 @@ fun DeathsChart(
 
                                 records.indices.forEach { index ->
                                     val x = padding + index * pointSpacing
-                                    if (kotlin.math.abs(offset.x - x) < 20f) {
+                                    if (kotlin.math.abs(offset.x - x) < thresholdPx) {
                                         selectedIndex = index
                                         return@detectTapGestures
                                     }
@@ -374,6 +378,7 @@ private fun formatDate(dateString: String, locale: Locale): String {
             date.format(formatter)
         }
     } catch (e: Exception) {
+        Log.w("StatisticsScreen", "Failed to parse date: $dateString", e)
         dateString
     }
 }

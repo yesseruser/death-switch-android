@@ -42,14 +42,16 @@ class StatsRepository(private val jsonStorage: JsonDeathStorage) {
     }
 
     private fun aggregateToMonths(records: List<DeathRecord>): List<DeathRecord> {
-        if (records.isEmpty()) return emptyList()
-
-        val recordsByMonth = records
-            .sortedBy { it.date }
-            .groupBy { record ->
-                val date = LocalDate.parse(record.date)
-                "${date.year}-${date.monthValue.toString().padStart(2, '0')}"
-            }
+        val recordsByMonth = if (records.isEmpty()) {
+            emptyMap()
+        } else {
+            records
+                .sortedBy { it.date }
+                .groupBy { record ->
+                    val date = LocalDate.parse(record.date)
+                    "${date.year}-${date.monthValue.toString().padStart(2, '0')}"
+                }
+        }
 
         val today = LocalDate.now()
         val result = mutableListOf<DeathRecord>()
