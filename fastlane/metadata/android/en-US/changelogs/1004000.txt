@@ -1,0 +1,3 @@
+Added statistics page!
+
+You can now track your death count across time, with a Today's Deaths display and a graph!
